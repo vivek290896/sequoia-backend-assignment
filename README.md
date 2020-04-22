@@ -23,6 +23,7 @@
     - User can create any number of new statuses or remove existing Status in a Project Board and once defined, A Task can be assigned to one of these statuses.
 	
 
+
 #### Technology stack with which you have to write with:
   - All the above CRUD operations should be exposed as REST endpoints
   - _Programming language_: 
@@ -36,6 +37,7 @@
 	- [ ] SQLite
 	- [ ] MS SQL
   - _Framework_: We don’t care as long it serves the above three pointers.
+
 
 
 #### Our expectations when you say your code is ready:
@@ -55,6 +57,7 @@
   - [ ] Covered 100% possible cases without errors and introduce new use-cases wherever "necessary" -- True traits of 10x developer :P
   - [ ] Build admin panel UI for it using any frontend framework.
   
+
 
 #### Interested enough? Steps to go ahead about this assignment:
   - Fork this Github repository. [Help link](https://guides.github.com/activities/forking) if needed
