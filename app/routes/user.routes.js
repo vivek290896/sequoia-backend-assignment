@@ -5,4 +5,6 @@ module.exports = app => {
     app.post("/user", users.create);
 
     app.get("/user",users.findByEmailId);
+
+    app.get("project/:projectId/user", users.findUsersInProject);
 };

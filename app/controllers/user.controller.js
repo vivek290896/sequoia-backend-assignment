@@ -41,6 +41,53 @@ exports.findByEmailId = (req,res) => {
         } else res.send(data);
     })
 };
+////if user is admin or not
+//     User.checkIfAdmin(req.query.email, (err,data) => {
+//         if (err) {
+//             if (err.kind === "not_found") {
+//                 res.status(404).send({
+//                     message: `User not found with id ${req.query.email}.`
+//                 });
+//             } else {
+//                 res.status(500).send({
+//                     message: "Error retrieving User with id " + req.query.email
+//                 });
+//             }
+//             console.log("email from params: ",JSON.stringify(req.query));
+//         } else{
+//             if(!data) {
+//                 res.status(203).send({
+//                    message: "Unauthorized access for user_id "+  req.query.email
+//                 });
+//             }
+//         }
+//     });
+//
+exports.findUsersInProject = (req,res) =>{
+    if(!req.query.email){
+        res.status(400).send({
+            message: "email_id can not be empty!"
+        });
+    }
+    User.fetchUsersByProject(req.query.email,req.params.project_id, (err, data) =>{
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Users not found for project_id ${req.params.project_id}.`
+                });
+            }else if(err.kind === "Access denied for project"){
+                res.status(403).send({
+                    message: `Access denied for project`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving Users for project_id " + req.params.project_id
+                });
+            }
+            // console.log("email from params: ",JSON.stringify(req.query));
+        } else res.send(data);
+    })
+};
 
 exports.updateUserType = (req,res) => {
     User.updateByEmail(req.params.email,req.query.type, (err,date) =>{

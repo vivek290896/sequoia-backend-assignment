@@ -34,9 +34,61 @@ User.findByEmailId = (emailId, result) => {
             return;
         }
 
-        // not found Customer with the id
+        // not found user with the id
         result({ kind: "not_found" }, null);
     });
+};
+
+User.checkIfAdmin = (email, result) =>{
+    sql.query(`SELECT type FROM users WHERE email = "${emailId}"`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            console.log("user type: ", res[0]);
+            if(res[0] === "admin") result(null, true);
+            else result(null,false);
+            return;
+        }
+
+        // not found user with the id
+        result({ kind: "not_found" }, null);
+    });
+};
+
+User.fetchUsersByProject = (email_id,project_id, result) =>{
+    sql.query(
+        `SELECT * FROM users WHERE email IN 
+                (SELECT assignee_email FROM tasks WHERE project_id = ${project_id})`,
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+            }
+
+            if (res.length) {
+                let flag = 0;
+                for(var i=0;i<res.length;i++){
+                    if (res[i].email === email_id){
+                        flag = 1;
+                    }
+                }
+                if (flag === 0){
+                    result("Access denied for project",null)
+                }
+                // console.log("found users for project: ", JSON.stringify(res));
+                else{
+                    result(null, res)
+                }
+                return;
+            }
+            result({ kind: "not_found" }, null);
+        }
+    )
 };
 
 User.updateByEmail = (email, type, result) => {
