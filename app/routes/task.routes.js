@@ -4,4 +4,6 @@ module.exports = app => {
     //create new task
     app.post("/task", tasks.create);
 
+    app.put("/task/:taskId", tasks.update);
+
 };

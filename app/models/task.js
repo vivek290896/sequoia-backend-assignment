@@ -23,4 +23,26 @@ Task.create = (newTask,result) => {
     });
 };
 
+Task.updateById = (id, task, result) => {
+    sql.query(
+        "UPDATE tasks SET title = ?, status = ?, description = ?, assignee_email = ? WHERE id = ?",
+        [task.title, task.status, task.description, task.assignee_email ,id],
+        (err, res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                // not found Customer with the id
+                result({ kind: "not_found" }, null);
+                return;
+            }
+
+            console.log("updated task: ", { id: id, ...task });
+            result(null, { id: id, ...task });
+        }
+    );
+};
 module.exports = Task;
