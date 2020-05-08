@@ -71,3 +71,14 @@
 _In case of any queries, mail to Karthikeyan NG <karthikeyan.ng@sequoia.com> or Indrajeet Kumar <indrajeet@sequoia.com>. We'll revert to you with the clarifications_
  
  
+# Headless-trello Rest APIs withNode.js, Express & MySQL
+
+## Project setup
+```
+npm install
+```
+
+### Run
+```
+node server.js
+```
