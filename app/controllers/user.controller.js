@@ -1,4 +1,5 @@
 const User = require("../models/user.js");
+const Task = require("../models/task.js");
 
 exports.create = (req,res) =>{
 
@@ -118,4 +119,70 @@ exports.updateUserType = (req,res) => {
 
         }
     })
+};
+
+exports.deleteUser = (req,res) => {
+
+    if(!req.params){
+        res.status(400).send({
+            message: "User email_id can not be empty!"
+        });
+    }
+
+    if(!req.query){
+        res.status(400).send({
+            message: "admin email_id can not be empty!"
+        });
+    }
+
+    //if user is admin or not
+    User.checkIfAdmin(req.query.admin_email, (err,data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Admin not found with id ${req.query.admin_email}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving Admin with id " + req.query.admin_email
+                });
+            }
+            // console.log("email from params: ",JSON.stringify(req.query));
+        } else{
+            if(data) {
+                //1. remove tasks 2. remove user
+                Task.delete(req.params.emailId,(err,data) =>{
+                    if (err) {
+                        if (err.kind === "not_found") {
+                            res.status(404).send({
+                                message: `Not found Task for user with id ${req.params.emailId}.`
+                            });
+                        } else {
+                            res.status(500).send({
+                                message: "Could not delete Task for user with id " + req.params.emailId
+                            });
+                        }
+                    } else{
+                        User.remove(req.params.emailId,(err,data) => {
+                            if (err) {
+                                if (err.kind === "not_found") {
+                                    res.status(404).send({
+                                        message: `Not found User with id ${req.params.emailId}.`
+                                    });
+                                } else {
+                                    res.status(500).send({
+                                        message: "Could not delete User with id " + req.params.emailId
+                                    });
+                                }
+                            } else res.send({ message: `User was deleted successfully!` });
+                        })
+                    }
+                });
+            } else {
+                res.status(203).send({
+                    message: "Unauthorized access for user_id "+  req.query.email
+                });
+            }
+        }
+    });
 };

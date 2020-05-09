@@ -45,4 +45,24 @@ Task.updateById = (id, task, result) => {
         }
     );
 };
+
+Task.delete = (assignee_email,result) =>{
+    sql.query(`DELETE FROM tasks WHERE assignee_email = ?`,
+        [assignee_email],
+        (err,res)=>{
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+                return;
+            }
+
+            if (res.affectedRows == 0) {
+                result({ kind: "not_found" }, null);
+                return;
+            }
+
+            console.log("deleted task with assignee_email: ", assignee_email);
+            result(null, res);
+        });
+}
 module.exports = Task;

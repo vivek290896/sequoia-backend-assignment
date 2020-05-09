@@ -9,4 +9,6 @@ module.exports = app => {
     app.get("/project/:projectId/user", users.findUsersInProject);
 
     app.get("/panel/admin",users.adminPanel);
+
+    app.delete("/user/:emailId",users.deleteUser);
 };

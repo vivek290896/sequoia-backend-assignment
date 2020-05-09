@@ -4,6 +4,6 @@ module.exports = app => {
     //create new task
     app.post("/task",taskValidationRules(),validate, tasks.create);
 
-    app.put("/task/:taskId", tasks.update);
+    app.put("/task/:taskId",taskValidationRules(),validate, tasks.update);
 
 };

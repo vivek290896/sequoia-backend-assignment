@@ -82,3 +82,9 @@ npm install
 ```
 node server.js
 ```
+
+#### Postman Collection of API's
+```
+https://www.getpostman.com/collections/632026cfebb8006caca8
+
+```
