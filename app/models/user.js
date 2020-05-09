@@ -92,7 +92,7 @@ User.fetchUsersByProject = (email_id,project_id, result) =>{
 };
 
 User.fetchAllUsersWithProject = result => {
-    sql.query(`SELECT U.name, U.email, T.project_id, P.name FROM users U, tasks T, projects P WHERE (T.assignee_email = U.email AND T.project_id = P.id)`,
+    sql.query(`SELECT U.name, U.email, T.project_id FROM users U, tasks T WHERE (T.assignee_email = U.email)`,
         (err,res) => {
             if (err) {
                 console.log("error: ", err);
