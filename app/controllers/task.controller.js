@@ -36,7 +36,7 @@ exports.create = (req,res) =>{
         title : req.body.title,
         status: req.body.status,
         description : req.body.description,
-        due_date : req.body.due_date,
+        due_date : new Date(req.body.due_date),
         project_id : req.body.project_id,
         assignee_email : req.body.assignee_email,
         assigner_email : req.body.assigner_email

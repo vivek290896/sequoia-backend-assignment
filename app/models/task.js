@@ -4,7 +4,7 @@ const Task = function (task) {
     this.title = task.title;
     this.status = task.status; //admin, user
     this.description = task.description;
-    this.due_date = task.due_date;
+    this.due_date = new Date(task.due_date);
     this.project_id = task.project_id;
     this.assignee_email = task.assignee_email;
     this.assigner_email = task.assigner_email;
@@ -25,8 +25,8 @@ Task.create = (newTask,result) => {
 
 Task.updateById = (id, task, result) => {
     sql.query(
-        "UPDATE tasks SET title = ?, status = ?, description = ?, assignee_email = ? WHERE id = ?",
-        [task.title, task.status, task.description, task.assignee_email ,id],
+        "UPDATE tasks SET title = ?, status = ?, description = ?, assignee_email = ?, due_date =? WHERE id = ?",
+        [task.title, task.status, task.description, task.assignee_email ,task.due_date, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

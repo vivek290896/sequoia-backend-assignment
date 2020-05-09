@@ -48,8 +48,8 @@ User.checkIfAdmin = (email, result) =>{
         }
 
         if (res.length) {
-            console.log("user type: ", res[0]);
-            if(res[0] === "admin") result(null, true);
+            console.log("user type: ", res[0].type);
+            if(res[0].type === "admin") result(null, true);
             else result(null,false);
             return;
         }
@@ -89,6 +89,22 @@ User.fetchUsersByProject = (email_id,project_id, result) =>{
             result({ kind: "not_found" }, null);
         }
     )
+};
+
+User.fetchAllUsersWithProject = result => {
+    sql.query(`SELECT U.name, U.email, T.project_id, P.name FROM users U, tasks T, projects P WHERE (T.assignee_email = U.email AND T.project_id = P.id)`,
+        (err,res) => {
+            if (err) {
+                console.log("error: ", err);
+                result(null, err);
+
+            }
+            else if (res){
+                result(null,res);
+
+            }
+            else result({ kind: "not_found" }, null);
+        });
 };
 
 User.updateByEmail = (email, type, result) => {
