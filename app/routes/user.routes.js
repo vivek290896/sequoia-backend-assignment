@@ -6,5 +6,7 @@ module.exports = app => {
 
     app.get("/user",users.findByEmailId);
 
-    app.get("project/:projectId/user", users.findUsersInProject);
+    app.get("/project/:projectId/user", users.findUsersInProject);
+
+    app.get("/panel/admin",users.adminPanel);
 };

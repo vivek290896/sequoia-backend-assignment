@@ -40,7 +40,7 @@ User.findByEmailId = (emailId, result) => {
 };
 
 User.checkIfAdmin = (email, result) =>{
-    sql.query(`SELECT type FROM users WHERE email = "${emailId}"`, (err, res) => {
+    sql.query(`SELECT type FROM users WHERE email = "${email}"`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -61,8 +61,8 @@ User.checkIfAdmin = (email, result) =>{
 
 User.fetchUsersByProject = (email_id,project_id, result) =>{
     sql.query(
-        `SELECT * FROM users WHERE email IN 
-                (SELECT assignee_email FROM tasks WHERE project_id = ${project_id})`,
+        `SELECT * FROM users WHERE email IN (SELECT assignee_email FROM tasks WHERE project_id = ?)`,
+        [project_id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
