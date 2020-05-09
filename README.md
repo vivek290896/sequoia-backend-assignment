@@ -27,11 +27,11 @@
 #### Technology stack with which you have to write with:
   - All the above CRUD operations should be exposed as REST endpoints
   - _Programming language_: 
-  	- [ ] NodeJS
+  	- [X] NodeJS
 	- [ ] Golang
 	- [ ] Python
   - _Database_: 
-  	- [ ] MySQL
+  	- [X] MySQL
 	- [ ] Postgresql
 	- [ ] MariaDB
 	- [ ] SQLite
@@ -42,19 +42,19 @@
 ##  We are not looking for UI implmentation of the board 
 
 #### Our expectations when you say your code is ready:
-  - [ ] Write all the APIs visualizing if there is a Trello board UI for this. We are not expecting any UI components
-  - [ ] Quality code standards. Hope you have done lint check before pushing the code. No one likes to hear, "I didn't have time so..".
-  - [ ] Apt input validations. Think from the end user perspective(username contains only alphanumerics, email satisfies the standard regex pattern, etc.,). They say "Something went wrong, please try again" shows laziness of a developer, so don't be one. More your code breaks, more we lose trust on your quality.
+  - [X] Write all the APIs visualizing if there is a Trello board UI for this. We are not expecting any UI components
+  - [X] Quality code standards. Hope you have done lint check before pushing the code. No one likes to hear, "I didn't have time so..".
+  - [X] Apt input validations. Think from the end user perspective(username contains only alphanumerics, email satisfies the standard regex pattern, etc.,). They say "Something went wrong, please try again" shows laziness of a developer, so don't be one. More your code breaks, more we lose trust on your quality.
   - [ ] (Optional Task) Tests. Be it Unit or Integration or API tests. At least one of them because only your tests can assure your code is working. 
   - Update documentation in README.md file for us which should have the following
-		○ [ ] How to build and run your code
+		○ [X] How to build and run your code
 		○ [ ] What are the assumptions you have made during development
 		○ [x] Checkmark these expectations when you have finished them
 	
 
 #### We'd be really impressed if you include at-least one of the following below along with fulfilling our above expectations:
-  - [ ] Dockerize your code.
-  - [ ] Generate Open API documentation using Swagger or related(Postman collection, etc.,)
+  - [X] Dockerize your code.
+  - [X] Generate Open API documentation using Swagger or related(Postman collection, etc.,)
   - [ ] Covered 99.99% possible cases without errors and introduce new use-cases wherever "necessary" -- True traits of 10x developer :P
   - [ ] Build admin panel UI for it using any frontend framework.
   
