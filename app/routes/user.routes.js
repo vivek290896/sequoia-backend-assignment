@@ -1,8 +1,8 @@
 module.exports = app => {
   const users = require("../controllers/user.controller.js");
-
+  const { userValidationRules, validate } = require('../validators/user.validator.js')
   //create new user
-    app.post("/user", users.create);
+    app.post("/user", userValidationRules(), validate, users.create);
 
     app.get("/user",users.findByEmailId);
 

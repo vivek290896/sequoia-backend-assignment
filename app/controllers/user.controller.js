@@ -89,11 +89,7 @@ exports.adminPanel = (req,res) => {
             }
             console.log("email from params: ",JSON.stringify(req.query));
         } else{
-            if(!data) {
-                res.status(203).send({
-                   message: "Unauthorized access for user_id "+  req.query.email
-                });
-            } else {
+            if(data) {
                 //user is a admin so he can see the projects
                 User.fetchAllUsersWithProject((err,data) =>{
                     if (err) {
@@ -105,6 +101,10 @@ exports.adminPanel = (req,res) => {
                         console.log("output: ", JSON.stringify(data));
                         res.send(data);
                     }
+                });
+            } else {
+                res.status(203).send({
+                    message: "Unauthorized access for user_id "+  req.query.email
                 });
             }
         }
